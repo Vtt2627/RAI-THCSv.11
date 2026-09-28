@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAI THCS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="bg-canvas-3d"></canvas>
+    <h1>Đánh giá sử dụng AI có trách nhiệm</h1>
+    <p> Hệ thống giúp học sinh lớp 9 tự đánh giá cách xử lí một số tình huống khi sử dụng AI. </p>
+    <div class="main-layout">
+
+        <!-- Biểu đồ bên trái) -->
+        <div class="chart-panel" id="left-chart-panel">
+            <h4>📊 ĐIỂM SỐ CÁC LƯỢT LÀM BÀI</h4>
+            <div class="chart-box">
+                <canvas id="scoreHistoryChart"></canvas>
+            </div>
+            <p class="chart-note">Các lượt đã làm trên thiết bị này</p>
+        </div>
+
+        <!-- Cột giữa: cấp mã, làm bài, kết quả -->
+        <div class="center-column">
+
+            <!-- Khung cấp mã học sinh tự động -->
+            <div id="startSection">
+                <label>Mã học sinh của bạn:</label>
+                <div id="studentCodeDisplay">Đang cấp mã học sinh...</div>
+                <button id="startButton" disabled>Bắt đầu đánh giá</button>
+            </div>
+
+            <!-- Khung làm bài đánh giá -->
+            <div id="quiz" style="display: none;">
+                <h2 id="questionNumber"></h2>
+                <p id="questionText"></p>
+                <div id="options"></div>
+                <br>
+                <button id="nextButton">Tiếp tục</button>
+            </div>
+
+            <!-- Khung hiển thị kết quả đánh giá -->
+            <div id="result" style="display: none;">
+                <h2>KẾT QUẢ ĐÁNH GIÁ</h2>
+                <p id="scoreResult"></p>
+                <h3>Các nội dung cần chú ý</h3>
+                <div id="attentionResult"></div>
+                <h3>Khuyến nghị</h3>
+                <div id="recommendationResult"></div>
+                <p class="researchLink"><a href="research.html">Xem khu vực nghiên cứu (dữ liệu trên thiết bị này)</a></p>
+            </div>
+
+        </div>
+
+        <!-- Biểu đồ bên phải (điều khiển bởi charts.js, chỉ hiện sau khi nộp bài) -->
+        <div class="chart-panel" id="right-chart-panel">
+            <h4>🕸️ PHÂN TÍCH 9 BIỂU HIỆN</h4>
+            <div class="chart-box">
+                <canvas id="competencyRadarChart"></canvas>
+            </div>
+            <p class="chart-note">HV01–HV09: rê chuột vào từng điểm để xem mô tả</p>
+        </div>
+
+    </div>
+
+    <!-- Thư viện: Three.js (nền 3D) và Chart.js (biểu đồ) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <script src="background.js"></script>
+
+    <!-- Thứ tự bắt buộc: data.js -> charts.js -> script.js -->
+    <script src="data.js"></script>
+    <script src="charts.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

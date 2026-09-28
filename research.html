@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Responsible - Khu vực nghiên cứu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Canvas nền 3D (điều khiển bởi background.js) -->
+    <canvas id="bg-canvas-3d"></canvas>
+
+    <div class="container">
+        <h1>KHU VỰC NGHIÊN CỨU</h1>
+        <p>Phân tích dữ liệu và theo dõi quá trình phát triển hệ thống.</p>
+        <p class="noteBox">
+            <strong>Lưu ý:</strong> Dữ liệu dưới đây chỉ là các lượt đánh giá đã được lưu
+            <em>trên chính thiết bị/trình duyệt này</em>, không phải dữ liệu tổng hợp của
+            toàn bộ học sinh. Nếu học sinh làm bài trên các máy khác nhau, mỗi máy sẽ có
+            một tập dữ liệu riêng.
+        </p>
+        <hr>
+
+        <section id="researchDashboard">
+            <h2>Tổng quan (thiết bị này)</h2>
+            <p id="researchTotalResults"></p>
+            <p id="researchAverageScore"></p>
+        </section>
+
+        <section>
+            <h2>Kết quả đánh giá</h2>
+            <div id="researchResults"></div>
+        </section>
+
+        <section>
+            <h2>Phân tích biểu hiện</h2>
+            <div id="researchBehaviorAnalysis"></div>
+        </section>
+
+        <p>
+            <button id="clearDataButton">Xóa dữ liệu trên thiết bị này</button>
+        </p>
+
+        <p><a href="index.html">Quay lại trang chính</a></p>
+    </div>
+
+    <!-- Thư viện Three.js + data.js/research.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="background.js"></script>
+
+    <script src="data.js"></script>
+    <script src="research.js"></script>
+</body>
+</html>
