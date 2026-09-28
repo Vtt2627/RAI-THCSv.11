@@ -81,7 +81,7 @@ const questions = [
             "Chuyển tiếp cho bạn bè",
             "Bảo mật thông tin, báo cáo link giả"
         ],
-        answer: 2
+        answer: 3
     },
     {
         id: "C08",
