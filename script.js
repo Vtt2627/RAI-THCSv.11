@@ -1,5 +1,7 @@
 const GAS_URL = "https://script.google.com/macros/s/AKfycbx_hLCpgHbloB3Sh6abgWnQ9vOpK5EXMiNDJRERL_G-FkK3qqlhOreKhOgeM1IzCGv1/exec";
 
+const STORAGE_KEY = "aiResponsibleResults";
+
 let currentQuestion = 0;
 let answers = [];
 let assignedCode = null;
@@ -15,6 +17,10 @@ const attentionResult = document.getElementById("attentionResult");
 const recommendationResult = document.getElementById("recommendationResult");
 const studentCodeDisplay = document.getElementById("studentCodeDisplay");
 
+function clearPreviousLocalData() {
+    localStorage.removeItem(STORAGE_KEY);
+}
+
 // Xin mã học sinh ngay khi vào trang
 function requestStudentCode() {
     studentCodeDisplay.textContent = "Đang cấp mã học sinh...";
@@ -25,6 +31,9 @@ function requestStudentCode() {
         .then(function(data) {
             if (!data.code) throw new Error("Không nhận được mã hợp lệ.");
             assignedCode = data.code;
+
+            clearPreviousLocalData();
+
             studentCodeDisplay.textContent = assignedCode;
             startButton.disabled = false;
         })
@@ -136,7 +145,6 @@ function getRecommendations(needAttention) {
     return result;
 }
 
-// Lưu bản sao cục bộ trên máy 
 function saveResult(studentCode, score, average, behaviorResults, needAttention, resultRecommendations) {
     const resultData = {
         studentCode: studentCode,
@@ -149,12 +157,11 @@ function saveResult(studentCode, score, average, behaviorResults, needAttention,
         needAttention: needAttention,
         recommendations: resultRecommendations
     };
-    let results = JSON.parse(localStorage.getItem("aiResponsibleResults")) || [];
-    results.push(resultData);
-    localStorage.setItem("aiResponsibleResults", JSON.stringify(results));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([resultData]));
 }
 
-// Gửi kết quả lên Google Sheet
+// Gửi kết quả lên Google Sheet - đây là nơi lưu trữ vĩnh viễn, đúng thứ tự mã, không bị
+// ảnh hưởng bởi việc xóa dữ liệu trên máy
 function sendResultToSheet(studentCode, score, average, needAttention, resultRecommendations) {
     const recommendationsText = resultRecommendations
         .map(function(item) { return item.behavior + ": " + item.recommendation; })
